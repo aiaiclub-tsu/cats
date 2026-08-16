@@ -8,58 +8,549 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* トップページ固有スタイル */
-    .hero-top { padding: 80px 24px 64px; }
-    .hero-top h1 { font-size: clamp(26px, 5vw, 48px); }
-    .search-section { background: var(--white); border-top: 1px solid var(--border); padding: 28px 24px; }
-    .search-inner { max-width: 1100px; margin: 0 auto; }
-    .filter-bar { margin-bottom: 0; }
-    .cats-section { padding: 48px 24px; }
-    .flow-section { background: var(--white); padding: 56px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .flow-steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 32px; }
-    .flow-step-card { text-align: center; padding: 0 16px; position: relative; }
-    .flow-step-card:not(:last-child)::after { content: '→'; position: absolute; right: -8px; top: 20px; font-size: 18px; color: var(--primary-light); font-weight: 800; }
-    .flow-step-num { width: 44px; height: 44px; border-radius: 50%; background: var(--primary); color: var(--white); font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .flow-step-title { font-size: 13px; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
-    .flow-step-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-    .calendar-section { padding: 56px 24px; }
-    .calendar-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--white); }
-    .calendar-item { display: flex; align-items: center; gap: 20px; padding: 16px 20px; border-bottom: 1px solid var(--border); transition: background var(--transition); }
-    .calendar-item:last-child { border-bottom: none; }
-    .calendar-item:hover { background: var(--gray-50); }
-    .calendar-date { text-align: center; background: var(--primary-light); border-radius: var(--radius-sm); padding: 8px 12px; min-width: 54px; flex-shrink: 0; }
-    .calendar-date .month { font-size: 10px; font-weight: 700; color: var(--primary); text-transform: uppercase; }
-    .calendar-date .day { font-size: 22px; font-weight: 800; color: var(--primary-dark); line-height: 1; }
-    .calendar-info { flex: 1; }
-    .calendar-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-    .calendar-place { font-size: 12px; color: var(--text-muted); }
-    .column-section { background: var(--white); border-top: 1px solid var(--border); padding: 56px 24px; }
-    .column-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .column-card { display: flex; gap: 16px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: var(--white); text-decoration: none; color: inherit; transition: all var(--transition); }
-    .column-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); opacity: 1; }
-    .column-thumb { width: 100px; height: 80px; background: var(--gray-200); flex-shrink: 0; object-fit: cover; }
-    .column-body { padding: 12px 12px 12px 0; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .column-cat-tag { font-size: 10px; padding: 2px 8px; border-radius: 3px; background: var(--primary-light); color: var(--primary-dark); font-weight: 700; display: inline-block; margin-bottom: 4px; align-self: flex-start; }
-    .column-title { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--text); }
-    .column-date { font-size: 11px; color: var(--text-light); margin-top: 4px; }
-    @media (max-width: 768px) {
-      .flow-steps-row { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-      .flow-step-card:not(:last-child)::after { display: none; }
-      .column-grid { grid-template-columns: 1fr; }
-    }
-  .calendar-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 3px;
-    line-height: 1.5;
-}
-.calendar-item:hover {
-  background: var(--accent);
-}
-  </style>
-</head>
-<body>
+      /* ===== ヒーロー ===== */
+      .top-hero {
+        position: relative;
+        height: 100svh;
+        min-height: 500px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .top-hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        animation: heroFade 25s infinite;
+      }
+      .top-hero-slide:nth-child(1) {
+        background-image: var(--slide1);
+        animation-delay: 0s;
+      }
+      .top-hero-slide:nth-child(2) {
+        background-image: var(--slide2);
+        animation-delay: 5s;
+      }
+      .top-hero-slide:nth-child(3) {
+        background-image: var(--slide3);
+        animation-delay: 10s;
+      }
+      .top-hero-slide:nth-child(4) {
+        background-image: var(--slide4);
+        animation-delay: 15s;
+      }
+      .top-hero-slide:nth-child(5) {
+        background-image: var(--slide5);
+        animation-delay: 20s;
+      }
+      @keyframes heroFade {
+        0% {
+          opacity: 0;
+        }
+        4% {
+          opacity: 1;
+        }
+        18% {
+          opacity: 1;
+        }
+        22% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      .top-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(30, 20, 10, 0.35);
+        z-index: 1;
+      }
+      .top-hero-text {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: #fff;
+        padding: 0 24px;
+      }
+      .top-hero-label {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 16px;
+        display: block;
+      }
+      .top-hero-catch {
+        font-family: "Noto Serif JP", serif;
+        font-size: clamp(28px, 5vw, 52px);
+        font-weight: 700;
+        line-height: 1.5;
+        letter-spacing: 0.05em;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      }
+      .top-hero-sub {
+        font-size: clamp(13px, 1.5vw, 16px);
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.9;
+        margin-bottom: 36px;
+        letter-spacing: 0.05em;
+      }
+      .top-hero-btns {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-hero-primary {
+        background: #79c4c1;
+        color: #fff;
+        padding: 14px 36px;
+        border-radius: 99px;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s;
+        letter-spacing: 0.05em;
+      }
+      .btn-hero-primary:hover {
+        background: #5ba8a5;
+        transform: translateY(-2px);
+        opacity: 1;
+      }
+      .btn-hero-secondary {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        padding: 13px 32px;
+        border-radius: 99px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s;
+        letter-spacing: 0.05em;
+      }
+      .btn-hero-secondary:hover {
+        background: rgba(255, 255, 255, 0.28);
+        opacity: 1;
+      }
+      .scroll-down {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 10px;
+        letter-spacing: 0.15em;
+      }
+      .scroll-down-line {
+        width: 1px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.5);
+        animation: scrollLine 1.8s ease-in-out infinite;
+      }
+      @keyframes scrollLine {
+        0% {
+          transform: scaleY(0);
+          transform-origin: top;
+        }
+        50% {
+          transform: scaleY(1);
+          transform-origin: top;
+        }
+        51% {
+          transform: scaleY(1);
+          transform-origin: bottom;
+        }
+        100% {
+          transform: scaleY(0);
+          transform-origin: bottom;
+        }
+      }
 
+      /* ===== セクション共通 ===== */
+      .top-section {
+        padding: 80px 24px;
+      }
+      .top-section-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .top-section-inner.reverse {
+        direction: rtl;
+      }
+      .top-section-inner.reverse > * {
+        direction: ltr;
+      }
+      .top-section-img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        border-radius: 16px;
+        background: var(--gray-200);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 56px;
+      }
+      .top-section-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .top-section-en {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: #79c4c1;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .top-section-title {
+        font-family: "Noto Serif JP", serif;
+        font-size: clamp(22px, 3vw, 30px);
+        font-weight: 700;
+        color: #3d2b1f;
+        line-height: 1.5;
+        margin-bottom: 16px;
+        letter-spacing: 0.03em;
+      }
+      .top-section-desc {
+        font-size: 14px;
+        color: #6b5a4e;
+        line-height: 2;
+        margin-bottom: 28px;
+      }
+      .btn-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #3d2b1f;
+        border-bottom: 1.5px solid #79c4c1;
+        padding-bottom: 4px;
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+      }
+      .btn-more:hover {
+        color: #79c4c1;
+        opacity: 1;
+        gap: 12px;
+      }
+      .btn-more::after {
+        content: "→";
+      }
+      .top-divider {
+        width: 48px;
+        height: 2px;
+        background: #79c4c1;
+        margin: 0 auto 48px;
+      }
+
+      /* ===== 猫一覧 ===== */
+      .top-cats-section {
+        background: #fffbf5;
+        padding: 80px 24px;
+      }
+      .top-cats-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+      .top-cats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: 0 auto 40px;
+      }
+      .top-cats-footer {
+        text-align: center;
+      }
+      .btn-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 40px;
+        border-radius: 99px;
+        border: 1.5px solid #3d2b1f;
+        color: #3d2b1f;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s;
+        letter-spacing: 0.05em;
+      }
+      .btn-all:hover {
+        background: #3d2b1f;
+        color: #fff;
+        opacity: 1;
+      }
+
+      /* ===== イベント ===== */
+      .top-event-section {
+        padding: 80px 24px;
+        background: #fff;
+      }
+      .top-event-inner {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .top-event-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .top-event-list {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid #e8e0d8;
+      }
+      .top-event-item {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 20px 8px;
+        border-bottom: 1px solid #e8e0d8;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+        color: inherit;
+      }
+      .top-event-item:hover {
+        background: #fffbf5;
+        opacity: 1;
+      }
+      .top-event-date-box {
+        text-align: center;
+        background: #79c4c1;
+        border-radius: 8px;
+        padding: 8px 14px;
+        flex-shrink: 0;
+        min-width: 60px;
+      }
+      .top-event-date-box .month {
+        font-size: 9px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.85);
+        text-transform: uppercase;
+      }
+      .top-event-date-box .day {
+        font-size: 22px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+      }
+      .top-event-info {
+        flex: 1;
+      }
+      .top-event-type {
+        font-size: 11px;
+        font-weight: 700;
+        color: #79c4c1;
+        letter-spacing: 0.1em;
+        margin-bottom: 3px;
+      }
+      .top-event-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #3d2b1f;
+        margin-bottom: 3px;
+      }
+      .top-event-place {
+        font-size: 12px;
+        color: #9b8a7e;
+      }
+      .top-event-note {
+        font-size: 12px;
+        color: #9b8a7e;
+        margin-top: 2px;
+      }
+      .top-event-arrow {
+        font-size: 16px;
+        color: #c8b5a8;
+        flex-shrink: 0;
+      }
+      .top-event-empty {
+        text-align: center;
+        padding: 48px 0;
+        color: #9b8a7e;
+        font-size: 14px;
+      }
+
+      /* ===== SNS ===== */
+      .top-sns-section {
+        background: #fffbf5;
+        padding: 60px 24px;
+        text-align: center;
+        border-top: 1px solid #e8e0d8;
+      }
+      .top-sns-links {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+      .sns-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 28px;
+        border-radius: 99px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s;
+        letter-spacing: 0.04em;
+      }
+      .sns-btn:hover {
+        transform: translateY(-2px);
+        opacity: 1;
+      }
+      .sns-btn-ig {
+        background: #fff;
+        color: #3d2b1f;
+        border: 1.5px solid #e8d5c0;
+      }
+      .sns-btn-ig:hover {
+        border-color: #79c4c1;
+      }
+      .sns-btn-amazon {
+        background: #79c4c1;
+        color: #fff;
+        border: none;
+      }
+      .sns-btn-amazon:hover {
+        background: #5ba8a5;
+      }
+
+      /* ===== フッター ===== */
+      .top-footer {
+        background: #3d2b1f;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 48px 24px 24px;
+      }
+      .top-footer-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .top-footer-logo {
+        font-family: "Noto Serif JP", serif;
+        font-size: 18px;
+        color: #fff;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      .top-footer-logo span {
+        color: #79c4c1;
+      }
+      .top-footer-desc {
+        font-size: 13px;
+        line-height: 1.8;
+        margin-bottom: 32px;
+      }
+      .top-footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 24px;
+      }
+      .top-footer-col h4 {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #79c4c1;
+        margin-bottom: 14px;
+      }
+      .top-footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .top-footer-col ul li a {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .top-footer-col ul li a:hover {
+        color: #fff;
+        opacity: 1;
+      }
+      .top-footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.4);
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .top-footer-bottom a {
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+      }
+      .top-footer-bottom a:hover {
+        color: rgba(255, 255, 255, 0.7);
+        opacity: 1;
+      }
+
+      @keyframes skeleton-pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .top-section {
+          padding: 56px 20px;
+        }
+        .top-section-inner,
+        .top-section-inner.reverse {
+          grid-template-columns: 1fr;
+          direction: ltr;
+          gap: 28px;
+        }
+        .top-cats-section,
+        .top-event-section {
+          padding: 56px 20px;
+        }
+        .top-footer-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+      }
+    </style>
+  </head>
 <!-- ナビゲーション -->
 <nav class="nav">
   <div class="nav-inner">
@@ -95,285 +586,378 @@
   </div>
 </nav>
 
-<!-- ヒーロー -->
-<section class="hero-slideshow" style="
---slide1: url('https://i.ibb.co/qMdtk9BD/kyara.jpg');
---slide2: url('https://i.ibb.co/5WZK5gZm/tyatora2.jpg');
---slide3: url('https://i.ibb.co/99F5PSBy/tora.jpg');
---slide4: url('https://i.ibb.co/YBd6C5N9/hatiware.jpg');
---slide5: url('https://i.ibb.co/XfL0D5JK/1.png');
-">
-  <div class="hero-slide"></div>
-  <div class="hero-slide"></div>
-  <div class="hero-slide"></div>
-  <div class="hero-slide"></div>
-  <div class="hero-slide"></div>
 
-  <div class="container">
-    <div class="hero-text-box">
-      <span class="section-label">保護猫 里親募集</span>
-      <h1>あなたにぴったりの<br>猫と出会おう</h1>
-      <p>愛アイクラブの保護猫たちが、<br>温かい家族との出会いをお待ちしています。</p>
-      <div class="hero-btns">
-        <a href="cats.html" class="btn btn-primary btn-lg">猫を探す →</a>
-        <a href="flow.html" class="btn btn-secondary btn-lg">お迎えの流れ</a>
+    <!-- ヒーロー -->
+    <!-- ★ --slide1〜5 の画像URLを差し替えてください -->
+    <section
+      class="top-hero"
+      style="
+        --slide1: url(&quot;images/hero1.jpg&quot;);
+        --slide2: url(&quot;images/hero2.jpg&quot;);
+        --slide3: url(&quot;images/hero3.jpg&quot;);
+        --slide4: url(&quot;images/hero4.jpg&quot;);
+        --slide5: url(&quot;images/hero5.jpg&quot;);
+      "
+    >
+      <div class="top-hero-slide"></div>
+      <div class="top-hero-slide"></div>
+      <div class="top-hero-slide"></div>
+      <div class="top-hero-slide"></div>
+      <div class="top-hero-slide"></div>
+      <div class="top-hero-overlay"></div>
+      <div class="top-hero-text">
+        <span class="top-hero-label">三重県津市 保護猫活動団体</span>
+        <h1 class="top-hero-catch">動物も人も、<br />幸せに暮らせるまちへ。</h1>
+        <p class="top-hero-sub">
+          アイ愛クラブは三重県津市を拠点に、<br />保護猫の里親募集や啓発活動を行っています。
+        </p>
+        <div class="top-hero-btns">
+          <a href="cats.html" class="btn-hero-primary">🐱 猫を探す</a>
+          <a href="about.html" class="btn-hero-secondary">団体について</a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+      <div class="scroll-down">
+        <div class="scroll-down-line"></div>
+        <span>SCROLL</span>
+      </div>
+    </section>
 
-<!-- 絞り込み検索 -->
-<section class="search-section">
-  <div class="search-inner">
-    <div class="filter-bar">
-      <div class="filter-search">
-        <input type="text" class="form-input" placeholder="名前で検索..." id="nameSearch">
-        <button class="btn btn-primary" onclick="location.href='cats.html'">検索</button>
+    <!-- 注目の猫 -->
+    <section class="top-cats-section">
+      <div class="top-cats-header">
+        <span class="top-section-en">Featured Cats</span>
+        <h2 class="top-section-title" style="text-align: center">
+          里親を待っている猫たち
+        </h2>
+        <div class="top-divider"></div>
       </div>
-      <div class="filter-dropdowns">
-        <select class="filter-select"><option value="">年齢（すべて）</option><option>子猫</option><option>成猫</option><option>老猫</option></select>
-        <select class="filter-select"><option value="">性別（すべて）</option><option>オス</option><option>メス</option></select>
-        <select class="filter-select"><option value="">毛の柄（すべて）</option><option>キジトラ</option><option>白猫</option><option>黒猫</option><option>三毛</option><option>茶トラ</option></select>
-        <select class="filter-select"><option value="">猫種（すべて）</option><option>雑種</option><option>スコティッシュ</option><option>マンチカン</option><option>アメショー</option></select>
-        <select class="filter-select"><option value="">状態（すべて）</option><option>募集中</option><option>トライアル中</option><option>譲渡決定</option></select>
+      <div class="top-cats-grid" id="skeletonGrid">
+        <div
+          style="
+            height: 240px;
+            border-radius: 16px;
+            background: #e8e0d8;
+            animation: skeleton-pulse 1.4s ease-in-out infinite;
+          "
+        ></div>
+        <div
+          style="
+            height: 240px;
+            border-radius: 16px;
+            background: #e8e0d8;
+            animation: skeleton-pulse 1.4s ease-in-out infinite;
+            animation-delay: 0.1s;
+          "
+        ></div>
+        <div
+          style="
+            height: 240px;
+            border-radius: 16px;
+            background: #e8e0d8;
+            animation: skeleton-pulse 1.4s ease-in-out infinite;
+            animation-delay: 0.2s;
+          "
+        ></div>
+        <div
+          style="
+            height: 240px;
+            border-radius: 16px;
+            background: #e8e0d8;
+            animation: skeleton-pulse 1.4s ease-in-out infinite;
+            animation-delay: 0.3s;
+          "
+        ></div>
       </div>
-    </div>
-  </div>
-</section>
+      <div class="top-cats-grid" id="topCatGrid" style="display: none"></div>
+      <p
+        id="topCatEmpty"
+        style="
+          display: none;
+          text-align: center;
+          padding: 32px;
+          color: #9b8a7e;
+          font-size: 14px;
+        "
+      >
+        現在募集中の猫はいません。
+      </p>
+      <div class="top-cats-footer">
+        <a href="cats.html" class="btn-all">すべての猫を見る</a>
+      </div>
+    </section>
 
-<!-- 猫一覧 -->
-<section class="cats-section">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;">
-      <div>
-        <span class="section-label">募集中の猫たち</span>
-        <h2 class="section-title">新しい家族を待っています</h2>
+    <!-- Cats -->
+    <section class="top-section" style="background: #fff">
+      <div class="top-section-inner">
+        <div class="top-section-img">
+          <img
+            src=""
+            alt="保護猫たちの様子"
+            onerror="this.parentElement.innerHTML = '🐱'"
+          />
+        </div>
+        <div>
+          <span class="top-section-en">Cats</span>
+          <h2 class="top-section-title">保護猫の<br />里親になりませんか？</h2>
+          <p class="top-section-desc">
+            アイ愛クラブでは、さまざまな事情で保護された猫たちの里親を募集しています。猫たちの性格や健康状態、お迎えの条件などをくわしくご紹介しています。まずはプロフィールをご覧ください。
+          </p>
+          <a href="cats.html" class="btn-more">猫たちを見る</a>
+        </div>
       </div>
-      <a href="cats.html" class="btn btn-outline btn-sm">もっと見る →</a>
-    </div>
-<div class="cat-grid" id="topCatGrid">
-  <!-- Firestoreから読み込み -->
-</div>
-<p id="topCatEmpty" style="display:none;text-align:center;padding:32px;color:var(--text-muted);font-size:14px;">
-  現在募集中の猫はいません。
-</p>
-  </div>
-</section>
+    </section>
 
-<!-- お迎えの流れ（簡易） -->
-<section class="flow-section">
-  <div class="container">
-    <div class="text-center" style="margin-bottom:8px;">
-      <span class="section-label">お迎えの流れ</span>
-      <h2 class="section-title">全6ステップでお迎えできます</h2>
-    </div>
-    <div class="flow-steps-row">
-      <div class="flow-step-card">
-        <div class="flow-step-num">1</div>
-        <div class="flow-step-title">猫を探す</div>
-        <div class="flow-step-desc"><a href='https://misa523118.github.io/aiaiclub/cats.html'>こちら</a>から猫たちの情報を<br>ご覧いただけます</div>
+    <!-- About -->
+    <section class="top-section" style="background: #fffbf5">
+      <div class="top-section-inner reverse">
+        <div class="top-section-img">
+          <img
+            src=""
+            alt="活動の様子"
+            onerror="this.parentElement.innerHTML = '🤝'"
+          />
+        </div>
+        <div>
+          <span class="top-section-en">About</span>
+          <h2 class="top-section-title">アイ愛クラブの<br />活動について</h2>
+          <p class="top-section-desc">
+            三重県津市を拠点に、啓発活動・里親会の開催・TNR活動・行政との連携など、さまざまな取り組みを行っています。命の大切さを伝え、動物も人も幸せに暮らせるまちをめざして活動しています。
+          </p>
+          <a href="about.html" class="btn-more">詳しく見る</a>
+        </div>
       </div>
-      <div class="flow-step-card">
-        <div class="flow-step-num">2</div>
-        <div class="flow-step-title">お問い合わせ</div>
-        <div class="flow-step-desc">フォームから<br>ご連絡ください</div>
-      </div>
-      <div class="flow-step-card">
-        <div class="flow-step-num">3</div>
-        <div class="flow-step-title">お家訪問</div>
-        <div class="flow-step-desc">メールでやり取りをした後<br>飼育環境をの確認をさせていただきます</div>
-      </div>
-      <div class="flow-step-card">
-        <div class="flow-step-num">4</div>
-        <div class="flow-step-title">トライアル</div>
-        <div class="flow-step-desc">約1週間の<br>お試し期間</div>
-      </div>
-    </div>
-    <div class="text-center" style="margin-top:32px;">
-      <a href="flow.html" class="btn btn-secondary">詳しい流れを見る</a>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- イベントカレンダー -->
-<section class="calendar-section">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;">
-      <div>
-        <span class="section-label">イベント</span>
-        <h2 class="section-title">譲渡会・イベント情報</h2>
+    <!-- Flow -->
+    <section class="top-section" style="background: #fff">
+      <div class="top-section-inner">
+        <div class="top-section-img">
+          <img
+            src=""
+            alt="お迎えの流れ"
+            onerror="this.parentElement.innerHTML = '🏠'"
+          />
+        </div>
+        <div>
+          <span class="top-section-en">Adoption Flow</span>
+          <h2 class="top-section-title">お迎えまでの<br />流れ</h2>
+          <p class="top-section-desc">
+            「猫を迎えたいけど、どうすればいいの？」という方のために、お問い合わせから正式譲渡までのステップをわかりやすくご説明しています。まずは気軽にご連絡ください。
+          </p>
+          <a href="flow.html" class="btn-more">流れを確認する</a>
+        </div>
       </div>
-    </div>
-    <div class="calendar-list" id="calendarList">
-     <div style="padding:24px;text-align:center;color:var(--text-muted);font-size:14px;">読み込み中...</div>
-    </div>
-   </div>
-</section>
+    </section>
 
-<!-- フッター -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">愛アイクラブ 里親募集</div>
-        <p class="footer-desc">保護猫たちに温かい家族を。<br>愛アイクラブは三重県を拠点に活動する保護団体です。</p>
+    <!-- イベント -->
+    <section class="top-event-section">
+      <div class="top-event-inner">
+        <div class="top-event-header">
+          <span class="top-section-en">Event</span>
+          <h2 class="top-section-title" style="text-align: center">
+            譲渡会・イベント情報
+          </h2>
+          <div class="top-divider"></div>
+        </div>
+        <div id="calendarList">
+          <div class="top-event-empty">読み込み中...</div>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>猫を探す</h4>
-        <ul>
-          <li><a href="cats.html">猫一覧</a></li>
-          <li><a href="flow.html">お迎えの流れ</a></li>
-          <li><a href="conditions.html">飼い主の条件</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>情報</h4>
-        <ul>
-          <li><a href="column.html">コラム</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>団体向け</h4>
-        <ul>
-          <li><a href="login.html">ログイン</a></li>
-          <li><a href="register.html">猫を登録する</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">© 2026 愛アイクラブ 里親募集サイト（仮）</span>
-    </div>
-  </div>
-</footer>
+    </section>
 
-<script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-</script>
-<script type="module">
-  import { db } from './firebase.js';
-  import { collection, getDocs, orderBy, query, where, limit }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    <!-- SNS -->
+    <section class="top-sns-section">
+      <span class="top-section-en">Follow & Support</span>
+      <h2 class="top-section-title" style="margin-bottom: 8px">
+        アイ愛クラブを応援する
+      </h2>
+      <p style="font-size: 14px; color: #9b8a7e; line-height: 1.8">
+        活動の様子はInstagramで発信しています。<br />物資のご支援もお待ちしています。
+      </p>
+      <div class="top-sns-links">
+        <a
+          href="https://www.instagram.com/aiaiclub_tsu/"
+          target="_blank"
+          rel="noopener"
+          class="sns-btn sns-btn-ig"
+          >📷 Instagram @aiaiclub_tsu</a
+        >
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener"
+          class="sns-btn sns-btn-amazon"
+          >🎁 Amazon 欲しいものリスト</a
+        >
+      </div>
+    </section>
 
-  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun',
-                  'Jul','Aug','Sep','Oct','Nov','Dec'];
+    <!-- フッター -->
+    <footer class="top-footer">
+      <div class="top-footer-inner">
+        <div class="top-footer-grid">
+          <div>
+            <div class="top-footer-logo">アイ<span>愛</span>クラブ</div>
+            <p class="top-footer-desc">
+              三重県津市を拠点に活動する保護猫活動団体です。<br />動物も人も幸せに暮らせるまちづくりをめざしています。
+            </p>
+          </div>
+          <div class="top-footer-col">
+            <h4>猫を探す</h4>
+            <ul>
+              <li><a href="cats.html">猫一覧</a></li>
+              <li><a href="favorites.html">お気に入り</a></li>
+              <li><a href="flow.html">お迎えの流れ</a></li>
+              <li><a href="conditions.html">飼い主の条件</a></li>
+            </ul>
+          </div>
+          <div class="top-footer-col">
+            <h4>情報</h4>
+            <ul>
+              <li><a href="about.html">団体について</a></li>
+              <li><a href="column.html">コラム</a></li>
+              <li><a href="contact.html">お問い合わせ</a></li>
+              <li><a href="privacy.html">プライバシーポリシー</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="top-footer-bottom">
+          <span>© 2026 保護猫活動団体 アイ愛クラブ</span>
+          <a href="privacy.html">プライバシーポリシー</a>
+        </div>
+      </div>
+    </footer>
 
-  // ── イベント読み込み（既存のまま） ──
-  async function loadEvents() {
-    const listEl = document.getElementById('calendarList');
-    try {
-      const today = new Date().toISOString().split('T')[0];
-      const q = query(collection(db, 'events'), orderBy('date', 'asc'));
-      const snapshot = await getDocs(q);
-      const events = snapshot.docs
-        .map(d => ({ id: d.id, ...d.data() }))
-        .filter(ev => ev.date >= today)
-        .slice(0, 5);
-      if (events.length === 0) {
-        listEl.innerHTML = `<div style="padding:24px;text-align:center;color:var(--text-muted);font-size:14px;">現在予定されているイベントはありません。</div>`;
-        return;
+    <script>
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
       }
-      listEl.innerHTML = events.map(ev => {
-        const d = new Date(ev.date + 'T00:00:00');
-        const month = MONTHS[d.getMonth()];
-        const day   = d.getDate();
-        const timeStr = ev.startTime
-          ? ` ${ev.startTime}${ev.endTime ? ' 〜 ' + ev.endTime : ''}` : '';
-        return `
-          <div class="calendar-item" onclick="location.href='event-detail.html?id=${ev.id}'"
-            style="cursor:pointer;">
-            <div class="calendar-date">
-              <div class="month">${month}</div>
-              <div class="day">${day}</div>
-            </div>
-            <div class="calendar-info">
-              <div class="calendar-title">${ev.title}${timeStr}</div>
-              <div class="calendar-place">📍 ${ev.venue || ''}${ev.address ? '　' + ev.address : ''}</div>
-              ${ev.note ? `<div class="calendar-note">${ev.note}</div>` : ''}
-            </div>
-            <div style="font-size:12px;color:var(--primary);font-weight:600;flex-shrink:0;align-self:center;">
-              参加猫を見る →
-            </div>
-          </div>`;
-      }).join('');
-    } catch (e) {
-      listEl.innerHTML = '';
-      console.error('イベント読み込みエラー:', e);
-    }
-  }
+    </script>
 
-  // ── 猫一覧読み込み（追加） ──
-  async function loadTopCats() {
-    const grid    = document.getElementById('topCatGrid');
-    const emptyEl = document.getElementById('topCatEmpty');
-    if (!grid) return;
-    try {
-      const q = query(
-        collection(db, 'cats'),
-        orderBy('favoriteCount', 'desc'),
-        limit(6)   // トップページは最新6匹まで表示
-      );
-      const snapshot = await getDocs(q);
-      const cats = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    <script type="module">
+      import { db } from "./firebase.js";
+      import {
+        collection,
+        getDocs,
+        orderBy,
+        query,
+        limit,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-      if (cats.length === 0) {
-        grid.style.display    = 'none';
-        emptyEl.style.display = 'block';
-        return;
-      }
+      const MONTHS = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
 
-      const statusMap = {
-        '募集中':      'badge-open',
-        'トライアル中': 'badge-trial',
-        '譲渡決定':    'badge-done',
-      };
-
-      grid.innerHTML = cats.map(cat => {
-        const firstImg = (cat.imageUrls && cat.imageUrls.length > 0)
-          ? cat.imageUrls[0] : (cat.imageUrl || '');
-        const badgeCls = statusMap[cat.status] || 'badge-open';
-        const thumbHtml = firstImg
-          ? `<img src="${firstImg}" alt="${cat.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='🐱'">`
-          : '🐱';
-        const meta = [cat.age, cat.sex, cat.color].filter(Boolean).join('・');
-        return `
+      async function loadTopCats() {
+        const skeleton = document.getElementById("skeletonGrid");
+        const grid = document.getElementById("topCatGrid");
+        const emptyEl = document.getElementById("topCatEmpty");
+        try {
+          const q = query(
+            collection(db, "cats"),
+            orderBy("favoriteCount", "desc"),
+            limit(4),
+          );
+          const snapshot = await getDocs(q);
+          const cats = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+          skeleton.style.display = "none";
+          if (cats.length === 0) {
+            emptyEl.style.display = "block";
+            return;
+          }
+          const statusMap = {
+            募集中: "badge-open",
+            トライアル中: "badge-trial",
+            譲渡決定: "badge-done",
+          };
+          grid.style.display = "";
+          grid.innerHTML = cats
+            .map((cat) => {
+              const img =
+                cat.imageUrls && cat.imageUrls.length > 0
+                  ? cat.imageUrls[0]
+                  : cat.imageUrl || "";
+              const cls = statusMap[cat.status] || "badge-open";
+              return `
           <div class="cat-card" onclick="location.href='cats.html'" style="cursor:pointer;">
             <div class="cat-card-img">
-              ${thumbHtml}
-              <span class="cat-badge ${badgeCls}">${cat.status || '募集中'}</span>
+              ${img ? `<img src="${img}" alt="${cat.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='🐱'">` : "🐱"}
+              <span class="cat-badge ${cls}">${cat.status || "募集中"}</span>
             </div>
             <div class="cat-card-body">
               <div class="cat-card-name">${cat.name}</div>
-              <div class="cat-card-meta">${meta}</div>
+              <div class="cat-card-meta">${[cat.age, cat.sex, cat.color].filter(Boolean).join("・")}</div>
             </div>
           </div>`;
-      }).join('');
+            })
+            .join("");
+        } catch (e) {
+          skeleton.style.display = "none";
+          emptyEl.style.display = "block";
+          console.error(e);
+        }
+      }
 
-    } catch (e) {
-      console.error('猫読み込みエラー:', e);
-    }
-  }
+      async function loadEvents() {
+        const listEl = document.getElementById("calendarList");
+        try {
+          const today = new Date().toISOString().split("T")[0];
+          const q = query(collection(db, "events"), orderBy("date", "asc"));
+          const snapshot = await getDocs(q);
+          const events = snapshot.docs
+            .map((d) => ({ id: d.id, ...d.data() }))
+            .filter((ev) => ev.date >= today)
+            .slice(0, 5);
+          if (events.length === 0) {
+            listEl.innerHTML =
+              '<div class="top-event-empty">現在予定されているイベントはありません。</div>';
+            return;
+          }
+          listEl.innerHTML =
+            `<div class="top-event-list">` +
+            events
+              .map((ev) => {
+                const d = new Date(ev.date + "T00:00:00");
+                const timeStr = ev.startTime
+                  ? `${ev.startTime}${ev.endTime ? " 〜 " + ev.endTime : ""}`
+                  : "";
+                return `
+          <a class="top-event-item" href="event-detail.html?id=${ev.id}">
+            <div class="top-event-date-box">
+              <div class="month">${MONTHS[d.getMonth()]}</div>
+              <div class="day">${d.getDate()}</div>
+            </div>
+            <div class="top-event-info">
+              <div class="top-event-type">${ev.type || ""}</div>
+              <div class="top-event-title">${ev.title}${timeStr ? "　" + timeStr : ""}</div>
+              <div class="top-event-place">📍 ${ev.venue || ""}${ev.address ? "　" + ev.address : ""}</div>
+              ${ev.note ? `<div class="top-event-note">${ev.note}</div>` : ""}
+            </div>
+            <div class="top-event-arrow">›</div>
+          </a>`;
+              })
+              .join("") +
+            `</div>`;
+        } catch (e) {
+          listEl.innerHTML =
+            '<div class="top-event-empty">読み込みに失敗しました。</div>';
+          console.error(e);
+        }
+      }
 
-  loadEvents();
-  loadTopCats();  // ← 追加
-</script>
-<script>
-  const FAV_KEY = 'aiaiclub_favorites';
-  function getFavorites() {
-    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
-    catch(e) { return []; }
-  }
-  function updateFavBadge() {
-    const cnt   = getFavorites().length;
-    const badge = document.getElementById('favBadge');
-    if (badge) {
-      badge.textContent   = cnt > 0 ? cnt : '';
-      badge.style.display = cnt > 0 ? 'inline-flex' : 'none';
-    }
-  }
-  updateFavBadge();
-</script>
-</body>
+      loadTopCats();
+      loadEvents();
+    </script>
+  </body>
 </html>
